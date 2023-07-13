@@ -52,6 +52,11 @@ def get_answer(query, vs_path, history, mode, score_threshold=VECTOR_SEARCH_SCOR
             vs_path):
         for resp, history in local_doc_qa.get_knowledge_based_answer(
                 query=query, vs_path=vs_path, chat_history=history, streaming=streaming):
+
+            if not resp["source_documents"]:
+                yield history + [[query,
+                                   "抱歉，在本知识库中未能没有匹配到任何内容。"]], ""
+           else:                 
             source = "\n\n"
             source += "".join(
                 [f"""<details> <summary>出处 [{i + 1}] {os.path.split(doc.metadata["source"])[-1]}</summary>\n"""
@@ -61,9 +66,7 @@ def get_answer(query, vs_path, history, mode, score_threshold=VECTOR_SEARCH_SCOR
                  enumerate(resp["source_documents"])])
             history[-1][-1] += source
             
-            if not resp["source_documents"]:
-                yield history + [[query,
-                                  "抱歉，在本知识库中未能没有匹配到任何内容。"]], ""
+
 
             yield history, ""
     elif mode == "知识库测试":
