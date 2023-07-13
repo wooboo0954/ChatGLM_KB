@@ -233,7 +233,8 @@ class LocalDocQA:
         if len(related_docs_with_score) > 0:
             prompt = generate_prompt(related_docs_with_score, query)
         else:
-            prompt = query
+            #prompt = query
+            return response, ""
 
         for answer_result in self.llm.generatorAnswer(prompt=prompt, history=chat_history,
                                                       streaming=streaming):
