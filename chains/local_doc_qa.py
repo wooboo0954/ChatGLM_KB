@@ -233,8 +233,7 @@ class LocalDocQA:
         if len(related_docs_with_score) > 0:
             prompt = generate_prompt(related_docs_with_score, query)
         else:
-            #prompt = query
-            return response, ""
+            prompt = "重复括号里的内容（抱歉，知识库没有找到相关信息。）"
 
         for answer_result in self.llm.generatorAnswer(prompt=prompt, history=chat_history,
                                                       streaming=streaming):
