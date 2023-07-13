@@ -60,6 +60,11 @@ def get_answer(query, vs_path, history, mode, score_threshold=VECTOR_SEARCH_SCOR
                  for i, doc in
                  enumerate(resp["source_documents"])])
             history[-1][-1] += source
+            
+            if not resp["source_documents"]:
+                yield history + [[query,
+                                  "抱歉，在本知识库中未能没有匹配到任何内容。"]], ""
+
             yield history, ""
     elif mode == "知识库测试":
         if os.path.exists(vs_path):
