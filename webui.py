@@ -55,7 +55,7 @@ def get_answer(query, vs_path, history, mode, score_threshold=VECTOR_SEARCH_SCOR
 
             if not resp["source_documents"]:
                 #query=""
-                yield history + [[query,"抱歉，在本知识库中未能没有匹配到任何内容。"]], ""
+                yield history,""
                 #yield history + [[query,
                                    #"抱歉，在本知识库中未能没有匹配到任何内容。"]], ""
             else:                 
