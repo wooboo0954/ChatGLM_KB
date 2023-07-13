@@ -54,7 +54,7 @@ def get_answer(query, vs_path, history, mode, score_threshold=VECTOR_SEARCH_SCOR
                 query=query, vs_path=vs_path, chat_history=history, streaming=streaming):
 
             if not resp["source_documents"]:
-                query=""
+                #query=""
                 yield history + [[query,"抱歉，在本知识库中未能没有匹配到任何内容。"]], ""
                 #yield history + [[query,
                                    #"抱歉，在本知识库中未能没有匹配到任何内容。"]], ""
